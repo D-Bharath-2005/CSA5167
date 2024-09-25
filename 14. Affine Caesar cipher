@@ -1,0 +1,23 @@
+from math import gcd
+
+plain = input("Enter the plain text: ").upper()
+a = int(input("Enter the value of a (must be coprime with 26): "))
+b = int(input("Enter the value of b: "))
+
+if gcd(a, 26) != 1:
+    print("The value of 'a' is not allowed as it is not coprime with 26.")
+else:
+    cipher = ""
+    for char in plain:
+        cipher += chr((a * (ord(char) - ord('A')) + b) % 26 + ord('A')) if char.isalpha() else char)
+
+    print("\nPLAIN TEXT:", plain)
+    print("\nENCRYPTED TEXT:", cipher)
+
+    a_inv = next(i for i in range(1, 26) if (a * i) % 26 == 1)
+
+    decrypted = ""
+    for char in cipher:
+        decrypted += chr((a_inv * (ord(char) - ord('A') - b + 26)) % 26 + ord('A')) if char.isalpha() else char)
+
+    print("\nAFTER DECRYPTION:", decrypted)
