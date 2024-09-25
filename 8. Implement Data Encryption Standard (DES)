@@ -1,0 +1,30 @@
+key = "133457799BBCDFF1"
+plaintext = "0123456789ABCDEF"
+
+key_bin = bin(int(key, 16))[2:].zfill(64)
+plaintext_bin = bin(int(plaintext, 16))[2:].zfill(64)
+
+initial_permuted_text = plaintext_bin
+left, right = initial_permuted_text[:32], initial_permuted_text[32:]
+
+for _ in range(1):
+    xor_result = bin(int(right, 2) ^ int(key_bin[:32], 2))[2:].zfill(32)
+    new_right = bin(int(left, 2) ^ int(xor_result, 2))[2:].zfill(32)
+    left, right = right, new_right
+
+final_output = left + right
+ciphertext = hex(int(final_output, 2))[2:].upper().zfill(16)
+
+print("Encrypted message (DES):", ciphertext)
+
+left, right = final_output[:32], final_output[32:]
+
+for _ in range(1):
+    xor_result = bin(int(right, 2) ^ int(key_bin[:32], 2))[2:].zfill(32)
+    new_right = bin(int(left, 2) ^ int(xor_result, 2))[2:].zfill(32)
+    left, right = right, new_right
+
+decrypted_output = left + right
+decrypted_text = hex(int(decrypted_output, 2))[2:].upper().zfill(16)
+
+print("Decrypted message (DES):", decrypted_text)
