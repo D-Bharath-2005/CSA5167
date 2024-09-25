@@ -1,0 +1,56 @@
+plaintext = "HELLOPYTHON"
+key = 3
+
+plaintext = plaintext.replace(" ", "").upper()
+
+rail = [["" for _ in range(len(plaintext))] for _ in range(key)]
+row, down = 0, True
+
+for i in range(len(plaintext)):
+    rail[row][i] = plaintext[i]
+    if down:
+        row += 1
+    else:
+        row -= 1
+    if row == 0 or row == key - 1:
+        down = not down
+
+ciphertext = ""
+for i in range(key):
+    for j in range(len(plaintext)):
+        if rail[i][j] != "":
+            ciphertext += rail[i][j]
+
+print("Encrypted message (Rail Fence):", ciphertext)
+
+rail = [["" for _ in range(len(plaintext))] for _ in range(key)]
+row, down = 0, True
+
+for i in range(len(plaintext)):
+    rail[row][i] = "*"
+    if down:
+        row += 1
+    else:
+        row -= 1
+    if row == 0 or row == key - 1:
+        down = not down
+
+index = 0
+for i in range(key):
+    for j in range(len(plaintext)):
+        if rail[i][j] == "*" and index < len(ciphertext):
+            rail[i][j] = ciphertext[index]
+            index += 1
+
+decrypted_text = ""
+row, down = 0, True
+for i in range(len(plaintext)):
+    decrypted_text += rail[row][i]
+    if down:
+        row += 1
+    else:
+        row -= 1
+    if row == 0 or row == key - 1:
+        down = not down
+
+print("Decrypted message (Rail Fence):", decrypted_text)
