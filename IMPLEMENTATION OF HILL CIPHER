@@ -1,0 +1,27 @@
+import numpy as np
+key = [[6, 24, 1], [13, 16, 10], [20, 17, 15]]
+message = "ACT"
+message = message.upper()
+cipher = ""
+message_vector = [ord(message[i]) - 65 for i in range(len(message))]
+
+for i in range(3):
+    cipher_value = 0
+    for j in range(3):
+        cipher_value += key[i][j] * message_vector[j]
+    cipher += chr((cipher_value % 26) + 65)
+
+print("Encrypted message:", cipher)
+
+key_inverse = np.array([[8, 5, 10], [21, 8, 21], [21, 12, 8]])
+
+cipher_vector = [ord(cipher[i]) - 65 for i in range(len(cipher))]
+decrypted_message = ""
+
+for i in range(3):
+    plain_value = 0
+    for j in range(3):
+        plain_value += key_inverse[i][j] * cipher_vector[j]
+    decrypted_message += chr((plain_value % 26) + 65)
+
+print("Decrypted message:", decrypted_message)
