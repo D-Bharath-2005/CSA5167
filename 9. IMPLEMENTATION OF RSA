@@ -1,0 +1,28 @@
+import random
+
+p = 61
+q = 53
+
+n = p * q
+phi_n = (p - 1) * (q - 1)
+
+e = 17
+
+d = 0
+for i in range(1, 10000):
+    if (e * i) % phi_n == 1:
+        d = i
+        break
+
+plaintext = "HELLO"
+plaintext_numbers = [ord(char) - ord('A') for char in plaintext]
+ciphertext_numbers = [(num ** e) % n for num in plaintext_numbers]
+
+decrypted_numbers = [(num ** d) % n for num in ciphertext_numbers]
+decrypted_text = ''.join(chr(num + ord('A')) for num in decrypted_numbers)
+
+print("Public key (n, e):", (n, e))
+print("Private key (n, d):", (n, d))
+print("Plaintext:", plaintext)
+print("Ciphertext:", ciphertext_numbers)
+print("Decrypted text:", decrypted_text)
