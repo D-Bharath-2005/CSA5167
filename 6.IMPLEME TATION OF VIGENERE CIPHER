@@ -1,0 +1,27 @@
+plaintext = "HELLO"
+keyword = "KEY"
+
+plaintext = plaintext.upper()
+keyword = keyword.upper()
+
+keyword_repeated = keyword * (len(plaintext) // len(keyword)) + keyword[:len(plaintext) % len(keyword)]
+
+ciphertext = ""
+
+for i in range(len(plaintext)):
+    plain_char = ord(plaintext[i]) - 65
+    key_char = ord(keyword_repeated[i]) - 65
+    cipher_char = (plain_char + key_char) % 26
+    ciphertext += chr(cipher_char + 65)
+
+print("Encrypted message:", ciphertext)
+
+decrypted_text = ""
+
+for i in range(len(ciphertext)):
+    cipher_char = ord(ciphertext[i]) - 65
+    key_char = ord(keyword_repeated[i]) - 65
+    plain_char = (cipher_char - key_char) % 26
+    decrypted_text += chr(plain_char + 65)
+
+print("Decrypted message:", decrypted_text)
