@@ -1,0 +1,7 @@
+import hashlib
+
+message = input("Enter a message: ")
+hash_object = hashlib.md5(message.encode())
+hash_hex = hash_object.hexdigest()
+
+print("MD5 Hash: {}".format(hash_hex))
