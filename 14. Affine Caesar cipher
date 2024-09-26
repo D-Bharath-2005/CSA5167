@@ -9,7 +9,7 @@ if gcd(a, 26) != 1:
 else:
     cipher = ""
     for char in plain:
-        cipher += chr((a * (ord(char) - ord('A')) + b) % 26 + ord('A')) if char.isalpha() else char)
+        cipher += chr((a * (ord(char) - ord('A')) + b) % 26 + ord('A')) if char.isalpha() else char
 
     print("\nPLAIN TEXT:", plain)
     print("\nENCRYPTED TEXT:", cipher)
@@ -18,6 +18,6 @@ else:
 
     decrypted = ""
     for char in cipher:
-        decrypted += chr((a_inv * (ord(char) - ord('A') - b + 26)) % 26 + ord('A')) if char.isalpha() else char)
+        decrypted += chr((a_inv * (ord(char) - ord('A') - b + 26)) % 26 + ord('A')) if char.isalpha() else char
 
     print("\nAFTER DECRYPTION:", decrypted)
